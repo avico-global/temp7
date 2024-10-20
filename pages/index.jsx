@@ -304,6 +304,7 @@ export default function Home({
             (item, index) =>
               item.isFeatured && (
                 <div
+                  key={index}
                   className={`relative overflow-hidden group h-[60vh] w-full`}
                 >
                   <Link

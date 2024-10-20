@@ -19,9 +19,8 @@ export default function MostPopular({ blog_list = [], imagePath }) {
         </div>
         <div className="grid grid-cols-mustRead gap-8 w-full">
           {mostPopularBlogs.slice(0, 1).map((item, index) => (
-            <div className="relative overflow-hidden group h-full">
+            <div key={index} className="relative overflow-hidden group h-full">
               <Link
-                key={index}
                 href={`/${sanitizeUrl(item.article_category) || "#"}`}
                 title={item.imageTitle}
                 className="relative overflow-hidden w-full"
@@ -64,9 +63,8 @@ export default function MostPopular({ blog_list = [], imagePath }) {
           ))}
           <div className="flex flex-col gap-8">
             {mostPopularBlogs.slice(1).map((item, index) => (
-              <div className="grid grid-cols-2 gap-5 group">
+              <div key={index} className="grid grid-cols-2 gap-5 group">
                 <Link
-                  key={index}
                   href={`/${sanitizeUrl(item.article_category) || "#"}`}
                   title={item.imageTitle}
                   className="relative overflow-hidden w-full h-56"
