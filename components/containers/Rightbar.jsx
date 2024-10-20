@@ -120,7 +120,7 @@ export default function Rightbar({
                 sanitizeUrl(item.article_category)
               )}/${encodeURI(sanitizeUrl(item.title))}`}
             >
-              <div className="overflow-hidden relative min-h-36 w-full bg-black flex-1 rounded">
+              <div className="overflow-hidden relative min-h-36 w-full bg-black flex-1">
                 <Image
                   title={item?.imageTitle || item?.title || "Article Thumbnail"}
                   alt={item?.tagline || item?.altText || "Article Thumbnail"}

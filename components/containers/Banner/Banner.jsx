@@ -6,7 +6,7 @@ export default function Banner({ image, data }) {
   return (
     <div>
       <FullContainer
-        className="min-h-[700px]"
+        className="min-h-[600px]"
         style={{
           backgroundColor: `rgba(0, 0, 0, ${data?.opacity / 100})`,
           color: data.textColor || "white",
@@ -33,7 +33,7 @@ export default function Banner({ image, data }) {
                100vw"
         />
       </FullContainer>
-      <div className="flex flex-col py-2">
+      <div className="flex flex-col items-center text-center py-2">
         <h1
           style={{ fontSize: data.titleFontSize || 48 }}
           className="font-bold capitalize  "

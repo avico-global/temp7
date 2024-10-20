@@ -19,6 +19,7 @@ import {
   sanitizeUrl,
 } from "@/lib/myFun";
 import MustRead from "@/components/containers/MustRead";
+import MostPopular from "@/components/containers/MostPopular";
 
 export default function Home({
   logo,
@@ -94,6 +95,8 @@ export default function Home({
     );
   };
 
+  const editorChoiceBlogs = blog_list?.filter((item) => item.isEditorChoice);
+
   return (
     <div className="min-h-screen">
       <Head>
@@ -141,8 +144,8 @@ export default function Home({
       />
 
       <FullContainer>
-        <Container className="py-10">
-          <div className="grid md:grid-cols-home gap-6 w-full">
+        <Container className="gap-24">
+          <div className="grid md:grid-cols-home gap-8 mt-10 w-full">
             <div>
               <h2 className="font-bold text-xl border-b pb-1 mb-5">
                 Editor&apos;s Choice
@@ -239,7 +242,7 @@ export default function Home({
                         sanitizeUrl(item.article_category)
                       )}/${encodeURI(sanitizeUrl(item.title))}`}
                     >
-                      <div className="overflow-hidden relative min-h-24 w-full bg-black flex-1 rounded">
+                      <div className="overflow-hidden relative min-h-24 w-full bg-black flex-1">
                         <Image
                           title={
                             item?.imageTitle ||
@@ -268,91 +271,97 @@ export default function Home({
               </div>
             </div>
           </div>
-        </Container>
 
-        <Container className="py-10">
-          <div className="border-t pt-5 px-4 text-center py-10 w-full flex flex-col items-center">
-            <h2 className="px-5 text-4xl font-bold -mt-10 text-center bg-white w-fit">
-              Latest Posts
-            </h2>
-            <h2 className="px-5 text-xl font-semibold text-gray-500 text-center mt-5">
-              Stay up-to-date
-            </h2>
-          </div>
+          <MostPopular blog_list={blog_list} imagePath={imagePath} />
+
           <div>
-            <div className="grid grid-cols-1 md:grid-cols-home1 gap-12 w-full">
-              <div className="flex flex-col gap-10 w-full">
-                {renderBlogList(blog_list)}
+            <div className="border-t pt-5 px-4 text-center py-10 w-full flex flex-col items-center">
+              <h2 className="px-5 text-4xl font-bold -mt-10 text-center bg-white w-fit">
+                Latest Posts
+              </h2>
+              <h2 className="px-5 text-xl font-semibold text-gray-500 text-center mt-5">
+                Stay up-to-date
+              </h2>
+            </div>
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-home1 gap-12 w-full">
+                <div className="flex flex-col gap-10 w-full">
+                  {renderBlogList(blog_list)}
+                </div>
+
+                <Rightbar
+                  widgets={page?.widgets}
+                  about_me={about_me}
+                  tag_list={tag_list}
+                  blog_list={blog_list}
+                  imagePath={imagePath}
+                  categories={categories}
+                />
               </div>
-
-              <Rightbar
-                widgets={page?.widgets}
-                about_me={about_me}
-                tag_list={tag_list}
-                blog_list={blog_list}
-                imagePath={imagePath}
-                categories={categories}
-              />
             </div>
           </div>
-        </Container>
+          {blog_list?.map(
+            (item, index) =>
+              item.isFeatured && (
+                <div
+                  className={`relative overflow-hidden group h-[60vh] w-full`}
+                >
+                  <Link
+                    key={index}
+                    href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                    title={item.imageTitle}
+                    className="relative overflow-hidden w-full h-full"
+                  >
+                    <Image
+                      src={`${imagePath}/${item.image || "no-image.png"}`}
+                      title={item.imageTitle}
+                      alt={item.altImage || item.tagline}
+                      priority={false}
+                      width={298}
+                      height={195}
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw, 33vw"
+                      className="h-full min-w-full group-hover:scale-125 transition-all duration-1000"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </Link>
 
-        <Container className="py-16">
-          <div className="border-t pt-5 px-4 text-center py-10 w-full flex flex-col items-center">
-            <h2 className="px-5 text-4xl font-bold -mt-10 text-center bg-white w-fit">
-              {"Editor's Choice"}
-            </h2>
-            <h2 className="px-5 text-xl font-semibold text-gray-500 text-center mt-5">
-              Optional Subtitle
-            </h2>
-          </div>
+                  <div className="flex flex-col items-center justify-center z-10 w-full text-center right-0 bg-black/20 group-hover:bg-black/50 transition-all duration-500 md:w-auto gap-8 cursor-pointer absolute top-0 h-full text-white p-10 left-0">
+                    <Link
+                      className="uppercase text-sm font-semibold bg-white text-black py-0.5 px-3"
+                      href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                    >
+                      {item.article_category}
+                    </Link>
 
-          <div className="grid lg:grid-cols-2 text-center gap-8">
-            <div className="flex flex-col w-full">
-              {blog_list?.map(
-                (item, index) =>
-                  item.isEditorChoice && (
-                    <div className="text-start" key={index}>
-                      <BlogCard
-                        category={sanitizeUrl(item.article_category) || "#"}
-                        title={item.title}
-                        published_at={item.published_at}
-                        tagline={item.tagline}
-                        image={
-                          item.image
-                            ? `${imagePath}/${item.image}`
-                            : "/no-image.png"
-                        }
-                        href={`/${encodeURI(
-                          sanitizeUrl(item.article_category)
-                        )}/${encodeURI(sanitizeUrl(item.title))}`}
-                        imageHeight="h-72 md:h-[620px]"
-                        imageWidth="w-full"
-                        imageTitle={
-                          item.imageTitle || item.title || "Blog Image Title"
-                        }
-                        altImage={
-                          item.altImage || item.tagline || "Article Thumbnail"
-                        }
-                        className="object-cover"
-                      />
+                    <Link
+                      href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                    >
+                      <h3 className="font-bold text-4xl max-w-xl group-hover:underline transition-all duration-500">
+                        {item.title}
+                      </h3>
+                    </Link>
+
+                    <div className="flex items-center justify-center gap-5">
+                      <p>{item.author}</p>
+                      {"-"}
+                      <p>{item.published_at}</p>
                     </div>
-                  )
-              )}
-            </div>
+                  </div>
+                </div>
+              )
+          )}
+          <MustRead blog_list={blog_list} imagePath={imagePath} />
 
-            <MustRead blog_list={blog_list} imagePath={imagePath} />
-          </div>
+          <Footer
+            logo={logo}
+            imagePath={imagePath}
+            blog_list={blog_list}
+            categories={categories}
+            footer_type={footer_type}
+          />
         </Container>
       </FullContainer>
-
-      <Footer
-        logo={logo}
-        imagePath={imagePath}
-        blog_list={blog_list}
-        categories={categories}
-        footer_type={footer_type}
-      />
 
       <JsonLd
         data={{

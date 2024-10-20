@@ -8,79 +8,108 @@ export default function MustRead({ blog_list = [], imagePath }) {
 
   return (
     mustReadBlogs?.length > 0 && (
-      <div className="grid grid-cols-1 gap-8 w-full">
-        {mustReadBlogs.map((item, index) => (
-          <BlogCard
-            key={item.id || index}
-            title={item.title}
-            published_at={item.published_at}
-            author={item.author}
-            date={item.published_at}
-            tagline={item.tagline}
-            description={item.articleContent}
-            image={`${imagePath}/${item.image || "no-image.png"}`}
-            href={
-              `/${sanitizeUrl(item.article_category)}/${sanitizeUrl(
-                item?.title
-              )}` || "#"
-            }
-            category={sanitizeUrl(item.article_category) || "#"}
-            imageTitle={item.imageTitle}
-            altImage={item.altImage}
-          />
-        ))}
+      <div>
+        <div className="border-t pt-5 px-4 text-center py-10 w-full flex flex-col items-center">
+          <h2 className="px-5 text-4xl font-bold -mt-10 text-center bg-white w-fit">
+            {"Must Read"}
+          </h2>
+          <h2 className="px-5 text-xl font-semibold text-gray-500 text-center mt-5">
+            Essential reads: Don't miss these standout articles.
+          </h2>
+        </div>
+        <div className="grid grid-cols-mustRead gap-8 w-full">
+          <div>
+            {mustReadBlogs.slice(0, 1).map((item, index) => (
+              <div className="relative overflow-hidden group h-full">
+                <Link
+                  key={index}
+                  href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                  title={item.imageTitle}
+                  className="relative overflow-hidden w-full"
+                >
+                  <Image
+                    src={`${imagePath}/${item.image || "no-image.png"}`}
+                    title={item.imageTitle}
+                    alt={item.altImage || item.tagline}
+                    priority={false}
+                    width={298}
+                    height={195}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw, 33vw"
+                    className="h-full min-w-full group-hover:scale-125 transition-all duration-1000"
+                    style={{ objectFit: "cover" }}
+                  />
+                </Link>
+
+                <div className="flex flex-col z-10 justify-end w-full right-0 bg-black/20 group-hover:bg-black/50 transition-all duration-500 md:w-auto gap-6 text-left absolute top-0 h-full text-white p-10 left-0">
+                  <Link
+                    className="uppercase font-semibold"
+                    href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                  >
+                    {item.article_category}
+                  </Link>
+
+                  <Link href={`/${sanitizeUrl(item.article_category) || "#"}`}>
+                    <h3 className="font-bold text-4xl group-hover:underline">
+                      {item.title}
+                    </h3>
+                  </Link>
+
+                  <div className="flex items-center gap-3 uppercase">
+                    <p className="font-semibold">{item.author}</p> {"-"}
+                    <p className="font-semibold">{item.published_at}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-8">
+            {mustReadBlogs.slice(1).map((item, index) => (
+              <div className="grid grid-cols-2 gap-5 group">
+                <Link
+                  key={index}
+                  href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                  title={item.imageTitle}
+                  className="relative overflow-hidden w-full h-48"
+                >
+                  <Image
+                    src={`${imagePath}/${item.image || "no-image.png"}`}
+                    title={item.imageTitle}
+                    alt={item.altImage || item.tagline}
+                    priority={false}
+                    width={298}
+                    height={195}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw, 33vw"
+                    className="h-full min-w-full group-hover:scale-125 transition-all duration-500"
+                    style={{ objectFit: "cover" }}
+                  />
+                </Link>
+
+                <div className="flex flex-col justify-center w-full md:w-auto gap-3 text-left">
+                  <Link
+                    className="text-gray-400 uppercase text-sm font-semibold"
+                    href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                  >
+                    {item.article_category}
+                  </Link>
+
+                  <Link href={`/${sanitizeUrl(item.article_category) || "#"}`}>
+                    <p className="font-bold text-2xl group-hover:underline">
+                      {item.title}
+                    </p>
+                  </Link>
+
+                  <p className="text-gray-400 uppercase text-sm font-semibold">
+                    {item.published_at}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     )
-  );
-}
-
-function BlogCard({
-  title,
-  image,
-  published_at,
-  href,
-  category,
-  imageTitle = "Article Thumbnail",
-  altImage = "No Thumbnail Found",
-  tagline,
-}) {
-  return (
-    <div className="grid grid-cols-2 gap-5">
-      <Link
-        href={href || "#"}
-        title={imageTitle}
-        className="relative overflow-hidden w-full h-48"
-      >
-        <Image
-          src={image}
-          title={imageTitle}
-          alt={altImage || tagline}
-          priority={false}
-          width={298}
-          height={195}
-          loading="lazy"
-          sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw, 33vw"
-          className="h-full min-w-full hover:scale-110 transition-all"
-          style={{ objectFit: "cover" }}
-        />
-      </Link>
-
-      <div className="flex flex-col justify-center w-full md:w-auto gap-3 text-left">
-        <Link
-          className="text-gray-400 uppercase text-sm font-semibold"
-          href={`/${category}`}
-        >
-          {category}
-        </Link>
-
-        <Link href={href || "#"}>
-          <p className="font-bold text-2xl hover:underline">{title}</p>
-        </Link>
-
-        <p className="text-gray-400 uppercase text-sm font-semibold">
-          {published_at}
-        </p>
-      </div>
-    </div>
   );
 }

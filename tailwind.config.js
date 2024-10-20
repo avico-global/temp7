@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        button:"rgb(253, 225, 152)",
-       banner:  "rgb(229, 220, 211)",
+        button: "rgb(253, 225, 152)",
+        banner: "rgb(229, 220, 211)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -74,13 +74,11 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       gridTemplateColumns: {
-        
         home: "0.3fr 1fr 0.3fr",
         home1: " 1fr 0.4fr",
         home2: " 1fr 0.6fr",
 
-        
-        choice:" 0.9fr 0.7fr ",
+        choice: " 0.9fr 0.7fr ",
         widget: "1fr 0.6fr",
         widget1: "0.5fr 1fr",
 
@@ -88,6 +86,7 @@ module.exports = {
         footer: "1fr 1fr 1.2fr",
         footerstyle2: "1fr 1fr",
         nav: "1fr 310px 1fr",
+        mustRead: "1fr 0.6fr",
       },
     },
   },

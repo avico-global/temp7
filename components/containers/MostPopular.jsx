@@ -1,86 +1,113 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Badge } from "../ui/badge";
-import Container from "../common/Container";
-import FullContainer from "../common/FullContainer";
 import { sanitizeUrl } from "@/lib/myFun";
 
 export default function MostPopular({ blog_list = [], imagePath }) {
-  const popularBlogs = blog_list.filter((item) => item.isPopular);
+  const mostPopularBlogs = blog_list.filter((item) => item.isPopular);
 
   return (
-    popularBlogs?.length > 0 && (
-      <FullContainer className="py-16 text-center">
-        <Container className="border border-gray-200 px-3 py-9 md:px-9">
-          <h2 className="font-bold text-3xl -mt-14 bg-white px-6">
-            Most Popular
+    mostPopularBlogs?.length > 0 && (
+      <div>
+        <div className="border-t pt-5 px-4 text-center py-10 w-full flex flex-col items-center">
+          <h2 className="px-5 text-4xl font-bold -mt-10 text-center bg-white w-fit">
+            {"Most Popular"}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-11 mb-3">
-            {popularBlogs.map((item, index) => (
-              <BlogCard
-                key={item.id || index}
-                title={item.title}
-                author={item.author}
-                date={item.published_at}
-                tagline={item.tagline}
-                description={item.articleContent}
-                image={`${imagePath}/${item.image || "no-image.png"}`}
-                href={
-                  `/${sanitizeUrl(item.article_category)}/${sanitizeUrl(
-                    item?.title
-                  )}` || "#"
-                }
-                category={item.article_category}
-                imageTitle={item.imageTitle}
-                altImage={item.altImage}
-              />
+          <h2 className="px-5 text-xl font-semibold text-gray-500 text-center mt-5">
+            Discover the top trending articles everyone is reading.
+          </h2>
+        </div>
+        <div className="grid grid-cols-mustRead gap-8 w-full">
+          {mostPopularBlogs.slice(0, 1).map((item, index) => (
+            <div className="relative overflow-hidden group h-full">
+              <Link
+                key={index}
+                href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                title={item.imageTitle}
+                className="relative overflow-hidden w-full"
+              >
+                <Image
+                  src={`${imagePath}/${item.image || "no-image.png"}`}
+                  title={item.imageTitle}
+                  alt={item.altImage || item.tagline}
+                  priority={false}
+                  width={298}
+                  height={195}
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw, 33vw"
+                  className="h-full min-w-full group-hover:scale-125 transition-all duration-1000"
+                  style={{ objectFit: "cover" }}
+                />
+              </Link>
+
+              <div className="flex flex-col z-10 justify-end w-full right-0 bg-black/20 group-hover:bg-black/50 transition-all duration-500 md:w-auto gap-5 text-left absolute top-0 h-full text-white p-10 left-0">
+                <Link
+                  className="uppercase font-semibold"
+                  href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                >
+                  {item.article_category}
+                </Link>
+
+                <Link href={`/${sanitizeUrl(item.article_category) || "#"}`}>
+                  <h3 className="font-bold text-4xl group-hover:underline">
+                    {item.title}
+                  </h3>
+                </Link>
+
+                <div className="flex items-center gap-3">
+                  <p className="capitalize font-semibold">{item.author}</p>{" "}
+                  {"-"}
+                  <p className="font-semibold">{item.published_at}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="flex flex-col gap-8">
+            {mostPopularBlogs.slice(1).map((item, index) => (
+              <div className="grid grid-cols-2 gap-5 group">
+                <Link
+                  key={index}
+                  href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                  title={item.imageTitle}
+                  className="relative overflow-hidden w-full h-56"
+                >
+                  <Image
+                    src={`${imagePath}/${item.image || "no-image.png"}`}
+                    title={item.imageTitle}
+                    alt={item.altImage || item.tagline}
+                    priority={false}
+                    width={298}
+                    height={195}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw, 33vw"
+                    className="h-full min-w-full group-hover:scale-125 transition-all duration-500"
+                    style={{ objectFit: "cover" }}
+                  />
+                </Link>
+
+                <div className="flex flex-col justify-center w-full md:w-auto gap-3 text-left">
+                  <Link
+                    className="text-gray-400 uppercase text-sm font-semibold"
+                    href={`/${sanitizeUrl(item.article_category) || "#"}`}
+                  >
+                    {item.article_category}
+                  </Link>
+
+                  <Link href={`/${sanitizeUrl(item.article_category) || "#"}`}>
+                    <p className="font-bold text-2xl group-hover:underline">
+                      {item.title}
+                    </p>
+                  </Link>
+
+                  <p className="text-gray-400 uppercase text-sm font-semibold">
+                    {item.published_at}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-        </Container>
-      </FullContainer>
+        </div>
+      </div>
     )
-  );
-}
-
-function BlogCard({
-  title,
-  image,
-  href,
-  category,
-  imageTitle = "Article Thumbnail",
-  altImage = "No Thumbnail Found",
-  tagline,
-}) {
-  return (
-    <div className="flex flex-col items-center text-center">
-      <Link
-        href={href || "#"}
-        title={imageTitle}
-        className="relative overflow-hidden w-full h-[195px]"
-      >
-        <Image
-          src={image}
-          title={imageTitle}
-          alt={altImage || tagline}
-          priority={false}
-          width={298}
-          height={195}
-          loading="lazy"
-          sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw, 33vw"
-          className="w-full h-full hover:scale-110 transition-all"
-          style={{ objectFit: "cover" }}
-        />
-      </Link>
-
-      <Link href={`/${sanitizeUrl(category)}`}>
-        <Badge className="text-center whitespace-nowrap my-2">{category}</Badge>
-      </Link>
-      <Link href={href || ""}>
-        <p className="font-semibold leading-5 text-lg hover:underline">
-          {title}
-        </p>
-      </Link>
-    </div>
   );
 }
