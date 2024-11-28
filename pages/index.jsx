@@ -387,18 +387,6 @@ export default function Home({
                 },
               },
               {
-                "@type": "WebSite",
-                "@id": `https://${domain}`,
-                url: `https://${domain}`,
-                name: domain,
-                description: meta?.description,
-                inLanguage: "en-US",
-                publisher: {
-                  "@type": "Organization",
-                  "@id": `https://${domain}`,
-                },
-              },
-              {
                 "@type": "Organization",
                 "@id": `https://${domain}`,
                 name: domain,

@@ -202,7 +202,6 @@ export default function Categories({
           categories={categories}
         />
 
-        {/* Render JSON-LD */}
         <JsonLd
           data={{
             "@context": "https://schema.org",

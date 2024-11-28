@@ -151,8 +151,6 @@ export default function Tags({
           category={category}
         />
 
-        {/* Render JSON-LD */}
-
         <JsonLd
           data={{
             "@context": "https://schema.org",

@@ -233,11 +233,17 @@ export default function Categories({
                 })),
               },
               {
-                "@type": "WebSite",
+                "@type": "WebPage",
                 "@id": `https://${domain}/${category}`,
                 url: `https://${domain}/${category}`,
-                name: meta?.title,
-                description: meta?.description,
+                name: meta?.title?.replaceAll(
+                  "##category##",
+                  category?.replaceAll("-", " ")
+                ),
+                description: meta?.description?.replaceAll(
+                  "##category##",
+                  category?.replaceAll("-", " ")
+                ),
                 inLanguage: "en-US",
                 publisher: {
                   "@type": "Organization",
