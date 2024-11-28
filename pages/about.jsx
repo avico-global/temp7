@@ -129,15 +129,15 @@ export default function About({
             "@context": "https://schema.org",
             "@graph": [
               {
-                "@type": "WebSite",
-                "@id": `http://${domain}/#website`,
-                url: `http://${domain}/`,
-                name: domain,
+                "@type": "WebPage",
+                "@id": `https://${domain}/about`,
+                url: `https://${domain}/about`,
+                name: meta?.title,
                 description: meta?.description,
                 inLanguage: "en-US",
                 publisher: {
                   "@type": "Organization",
-                  "@id": `http://${domain}`,
+                  "@id": `https://${domain}`,
                 },
               },
               {
@@ -146,7 +146,7 @@ export default function About({
                   "@type": "ListItem",
                   position: index + 1,
                   name: breadcrumb.label,
-                  item: `http://${domain}${breadcrumb.url}`,
+                  item: `https://${domain}${breadcrumb.url}`,
                 })),
               },
             ],

@@ -119,14 +119,12 @@ export default function Terms({
           footer_type={footer_type}
         />
 
-        {/* Render JSON-LD Data */}
-
         <JsonLd
           data={{
             "@context": "https://schema.org",
             "@graph": [
               {
-                "@type": "WebSite",
+                "@type": "WebPage",
                 "@id": `https://${domain}/terms-and-conditions`,
                 url: `https://${domain}/terms-and-conditions`,
                 name: meta?.title,
