@@ -75,9 +75,9 @@ export default function Navbar({
                   onMouseEnter={() => setIsDropdownOpen(true)}
                   onMouseLeave={() => setIsDropdownOpen(false)}
                 >
-                  <Link title="Categories" href="" className="hover:text-black">
+                  <button title="Categories" className="hover:text-black">
                     Categories
-                  </Link>
+                  </button>
 
                   {/* Categories Dropdown */}
                   {isDropdownOpen && (
