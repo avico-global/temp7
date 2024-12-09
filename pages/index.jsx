@@ -363,38 +363,45 @@ export default function Home({
 
         <JsonLd
           data={{
-            "@context": "https://schema.org",
+            "@context": "https://www.schema.org",
             "@graph": [
               {
-                "@type": "BreadcrumbList",
-                itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-                  "@type": "ListItem",
-                  position: index + 1,
-                  name: breadcrumb.label,
-                  item: `https://${domain}${breadcrumb.url}`,
-                })),
-              },
-              {
-                "@type": "WebPage",
-                "@id": `https://${domain}/${category}`,
-                url: `https://${domain}/${category}`,
-                name: meta?.title?.replaceAll(
-                  "##category##",
-                  category?.replaceAll("-", " ")
-                ),
-                description: meta?.description?.replaceAll(
-                  "##category##",
-                  category?.replaceAll("-", " ")
-                ),
-                inLanguage: "en-US",
-                publisher: {
-                  "@type": "Organization",
+                "@type": "WebSite",
+                "@id": `https://${domain}/`,
+                url: `https://${domain}/`,
+                name: meta?.title,
+                isPartOf: {
                   "@id": `https://${domain}`,
+                },
+                description: meta?.description,
+                inLanguage: "en-US",
+                primaryImageOfPage: {
+                  "@type": "ImageObject",
+                  url: `${imagePath}/${banner?.file_name}`,
+                  width: 1920,
+                  height: 1080,
                 },
               },
               {
+                "@type": "Organization",
+                "@id": `https://${domain}`,
+                name: domain,
+                url: `https://${domain}`,
+                logo: {
+                  "@type": "ImageObject",
+                  url: `${imagePath}/${logo.file_name}`,
+                  width: logo.width,
+                  height: logo.height,
+                },
+                sameAs: [
+                  "https://www.facebook.com",
+                  "https://www.twitter.com",
+                  "https://instagram.com",
+                ],
+              },
+              {
                 "@type": "ItemList",
-                url: `https://${domain}/${category}`,
+                url: `https://${domain}`,
                 name: "blog",
                 itemListElement: blog_list?.map((blog, index) => ({
                   "@type": "ListItem",
@@ -402,9 +409,9 @@ export default function Home({
                   item: {
                     "@type": "Article",
                     url: `https://${domain}/${sanitizeUrl(
-                      blog?.article_category.replaceAll(" ", "-")
+                      blog?.article_category
                     )}/${sanitizeUrl(blog?.title)}`,
-                    name: blog.title,
+                    name: blog?.title,
                   },
                 })),
               },
