@@ -24,23 +24,7 @@ export default function Footer({
           <Logo logo={logo} imagePath={imagePath} />
         </div>
 
-        <div className="grid grid-cols-2 gap-5 p-2">
-          <div className="flex flex-col">
-            <p className="font-bold mb-5">Categories</p>
-            {categories?.map((item, index) => (
-              <Link
-                key={index}
-                title={item?.title || "Article Link"}
-                href={`/${sanitizeUrl(item.title)}`}
-                className={cn(
-                  "uppercase text-sm mb-2 hover:text-button w-fit transition-all",
-                  category === item.title && "border-b-2 border-button"
-                )}
-              >
-                {item.title}
-              </Link>
-            ))}
-          </div>
+          
           <div className="flex flex-col ">
             <p className="font-bold mb-5">Quick Links</p>
             <Link
@@ -88,9 +72,25 @@ export default function Footer({
               </a>
             </Link>
           </div>
-        </div>
         <LatestPosts blog_list={blog_list} imagePath={imagePath} />
       </div>
+
+            <p className="font-bold mb-5 lg:text-center ">Categories</p>
+      <div className="flex flex-col lg:flex-row justify-center text-center lg:gap-10">
+            {categories?.map((item, index) => (
+              <Link
+                key={index}
+                title={item?.title || "Article Link"}
+                href={`/${sanitizeUrl(item.title)}`}
+                className={cn(
+                  "uppercase text-sm mb-2 hover:text-button w-fit transition-all",
+                  category === item.title && "border-b-2 border-button"
+                )}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
 
       <p className="mt-12 py-6 border-t  text-center  text-sm">
         All Right Reservfed{" "}

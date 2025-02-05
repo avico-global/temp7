@@ -151,14 +151,19 @@ export default function Blog({
         </FullContainer>
 
         <LatestBlogs blogs={blog_list} imagePath={imagePath} />
-
-        <Footer
+        <FullContainer>
+          <Container>
+          <Footer
           logo={logo}
           imagePath={imagePath}
           blog_list={blog_list}
           categories={categories}
           footer_type={footer_type}
         />
+          </Container>
+        </FullContainer>
+
+      
 
         <JsonLd
           data={{

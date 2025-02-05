@@ -206,11 +206,14 @@ export default function Categories({
                 contact_details={contact_details}
               />
             </div>
+            
+      
           </Container>
         </FullContainer>
-
-        {/* Footer */}
-        <Footer
+<FullContainer>
+  <Container>
+      {/* Footer */}
+      <Footer
           logo={logo}
           imagePath={imagePath}
           blog_list={blog_list}
@@ -218,6 +221,8 @@ export default function Categories({
           category={category}
           footer_type={footer_type}
         />
+  </Container>
+</FullContainer>
 
         <JsonLd
           data={{
