@@ -42,8 +42,8 @@ export default function Rightbar({
           className="-z-10 object-cover"
         />
         <div className="absolute inset-0  flex flex-col justify-end text-start p-4  font-bold text-white  text-xl bg-black bg-opacity-50">
-          <h3 className=" lg:text-3xl font-semibold ">About</h3>
-          {content.slice(4, 50)}...
+          <h3 className=" lg:text-3xl font-bold ">About</h3>
+          {content.slice(3, 47)}...
         </div>
       </div>
     </Link>

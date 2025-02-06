@@ -99,7 +99,7 @@ export default function About({
         <FullContainer>
           <Container>
             <Breadcrumbs breadcrumbs={breadcrumbs} className="mt-7" />
-            <div className="grid grid-cols-about gap-16 w-full">
+            <div className="grid grid-cols-about gap-16 w-full mb-10">
               <div
                 className="markdown-content about_me prose max-w-full mt-5"
                 dangerouslySetInnerHTML={{ __html: content }}
@@ -115,14 +115,17 @@ export default function About({
             </div>
           </Container>
         </FullContainer>
-
-        <Footer
-          logo={logo}
-          imagePath={imagePath}
-          blog_list={blog_list}
-          categories={categories}
-          footer_type={footer_type}
-        />
+        <FullContainer>
+          <Container>
+            <Footer
+              logo={logo}
+              imagePath={imagePath}
+              blog_list={blog_list}
+              categories={categories}
+              footer_type={footer_type}
+            />
+          </Container>
+        </FullContainer>
 
         <JsonLd
           data={{
