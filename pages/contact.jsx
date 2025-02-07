@@ -15,6 +15,7 @@ import GoogleTagManager from "@/lib/GoogleTagManager";
 import useBreadcrumbs from "@/lib/useBreadcrumbs";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
 import JsonLd from "@/components/json/JsonLd";
+import { MailOpen, MapIcon, Phone } from "lucide-react";
 const myFont = Raleway({
   subsets: ["cyrillic", "cyrillic-ext", "latin", "latin-ext"],
 });
@@ -96,46 +97,164 @@ export default function Contact({
               </h1>
             </Container>
           </FullContainer>
-
-          {/* Render Map */}
-          <FullContainer>
-            <Container>
-              {contact_details?.mapDetails?.mapUrl ? (
-                <LoadScript googleMapsApiKey="AIzaSyAPeJFoV41Bq2QOImPkf3Dai8hP6aZ7MFg">
-                  <GoogleMap
-                    mapContainerClassName="h-[500px] w-full rouded-md"
-                    center={contact_details?.mapDetails?.center}
-                    zoom={12}
-                  >
-                    <Marker position={contact_details?.mapDetails?.center} />
-                  </GoogleMap>
-                </LoadScript>
-              ) : (
-                <Map location="united states" />
-              )}
-            </Container>
-          </FullContainer>
-          {/* Render Contact Info */}
-          <FullContainer>
-            <Container className="mt-10 text-center text-gray-500 text-xs gap-3">
-              <p className="text-xl mt-3 font-bold text-black">
-                {contact_details?.name}
-              </p>
-              <p>{contact_details?.email}</p>
-              <p>{contact_details?.address}</p>
-              <p>{contact_details?.phone}</p>
-            </Container>
-          </FullContainer>
         </div>
 
-        {/* Render Footer */}
-        <Footer
-          logo={logo}
-          imagePath={imagePath}
-          blog_list={blog_list}
-          categories={categories}
-          footer_type={footer_type}
-        />
+        <div className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b ">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Left Side - Image and Contact Info */}
+              <div className="hidden lg:block">
+                <div className="relative h-[600px] rounded-2xl overflow-hidden">
+                  <img
+                    src={
+                      "/img/contact1.png" ||
+                      `${imagePath}/${about_me.file_name}`
+                    }
+                    alt="Contact Us"
+                    className="object-cover w-full h-full"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-8">
+                    <div className="space-y-4">
+                      <div className="flex items-center text-gray-100">
+                        <Phone className="w-5 h-5 mr-3" />
+                        <span>
+                          {contact_details?.phone || "+1 (555) 000-0000"}
+                        </span>
+                      </div>
+                      <div className="flex items-center text-gray-100">
+                        <MailOpen className="w-5 h-5 mr-3" />
+                        <span>
+                          {contact_details?.email || "contact@example.com"}
+                        </span>
+                      </div>
+                      <div className="flex items-center text-gray-100">
+                        <MapIcon className="w-5 h-5 mr-3" />
+                        <span>
+                          {contact_details?.address ||
+                            "123 Business Street, City, Country"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Contact Form */}
+              <div>
+                <div className="text-center mb-12 lg:text-left">
+                  <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent mb-4">
+                    Get in Touch
+                  </h1>
+                  <p className="text-lg text-gray-600">
+                    We&apos;d love to hear from you. Please fill out this form.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl shadow-2xl p-8 md:p-12 bg-white/95 backdrop-blur-sm border border-gray-100">
+                  <form className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="relative">
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Full Name
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400"
+                            placeholder="John Doe"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="relative">
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Email Address
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400"
+                            placeholder="john@example.com"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        Phone Number
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400"
+                          placeholder="+1 (555) 000-0000"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <label
+                        htmlFor="message"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        Your Message
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={6}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400 resize-none"
+                        placeholder="Write your message here..."
+                        required
+                      />
+                    </div>
+
+                    <div className="mt-8">
+                      <button
+                        type="submit"
+                        className="w-full bg-gradient-to-r from-primary to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+                      >
+                        Send Message
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <FullContainer>
+          <Container>
+            {/* Render Footer */}
+            <Footer
+              logo={logo}
+              imagePath={imagePath}
+              blog_list={blog_list}
+              categories={categories}
+              footer_type={footer_type}
+            />
+          </Container>
+        </FullContainer>
 
         <JsonLd
           data={{
