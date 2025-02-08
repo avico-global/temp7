@@ -69,7 +69,11 @@ export default function Categories({
           <title>
             {meta?.title?.replaceAll(
               "##category##",
-              category?.replaceAll("-", " ")
+              category
+                ?.replaceAll("-", " ")
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")
             )}
           </title>
           <meta
@@ -206,23 +210,21 @@ export default function Categories({
                 contact_details={contact_details}
               />
             </div>
-            
-      
           </Container>
         </FullContainer>
-<FullContainer>
-  <Container>
-      {/* Footer */}
-      <Footer
-          logo={logo}
-          imagePath={imagePath}
-          blog_list={blog_list}
-          categories={categories}
-          category={category}
-          footer_type={footer_type}
-        />
-  </Container>
-</FullContainer>
+        <FullContainer>
+          <Container>
+            {/* Footer */}
+            <Footer
+              logo={logo}
+              imagePath={imagePath}
+              blog_list={blog_list}
+              categories={categories}
+              category={category}
+              footer_type={footer_type}
+            />
+          </Container>
+        </FullContainer>
 
         <JsonLd
           data={{

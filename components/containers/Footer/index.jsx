@@ -76,7 +76,7 @@ export default function Footer({
       </div>
 
             <p className="font-bold mb-5 lg:text-center ">Categories</p>
-      <div className="flex flex-col lg:flex-row justify-center text-center lg:gap-10">
+      <div className="flex flex-col lg:flex-row justify-center text-center lg:gap-10 mb-8">
             {categories?.map((item, index) => (
               <Link
                 key={index}
@@ -92,9 +92,6 @@ export default function Footer({
             ))}
           </div>
 
-      <p className="mt-12 py-6 border-t  text-center  text-sm">
-        All Right Reservfed{" "}
-      </p>
     </div>
   );
 }

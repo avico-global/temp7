@@ -88,157 +88,117 @@ export default function Contact({
             categories={categories}
             contact_details={contact_details}
           />
-          {/* Render Breadcrumbs */}
-          <FullContainer>
-            <Container>
-              <Breadcrumbs breadcrumbs={breadcrumbs} className="py-7" />
-              <h1 className="w-full text-3xl font-bold border-b mb-10">
-                Contact Us
-              </h1>
-            </Container>
-          </FullContainer>
         </div>
 
-        <div className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b ">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* Left Side - Image and Contact Info */}
-              <div className="hidden lg:block">
-                <div className="relative h-[600px] rounded-2xl overflow-hidden">
-                  <img
-                    src={
-                      "/img/contact1.png" ||
-                      `${imagePath}/${about_me.file_name}`
-                    }
-                    alt="Contact Us"
-                    className="object-cover w-full h-full"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-8">
-                    <div className="space-y-4">
-                      <div className="flex items-center text-gray-100">
-                        <Phone className="w-5 h-5 mr-3" />
-                        <span>
-                          {contact_details?.phone || "+1 (555) 000-0000"}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-gray-100">
-                        <MailOpen className="w-5 h-5 mr-3" />
-                        <span>
-                          {contact_details?.email || "contact@example.com"}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-gray-100">
-                        <MapIcon className="w-5 h-5 mr-3" />
-                        <span>
-                          {contact_details?.address ||
-                            "123 Business Street, City, Country"}
-                        </span>
-                      </div>
-                    </div>
+        <div className=" pt-6 pb-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
+          <div className="max-w-5xl mx-auto">
+            {/* Form Section */}
+            <div className="text-center mb-12">
+              <h1 className="w-full text-3xl font-bold  mb-4">Contact Us</h1>
+              <div>
+                <Breadcrumbs
+                  breadcrumbs={breadcrumbs}
+                  className="py-2 justify-center"
+                />
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+              <form className="space-y-8 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="firstName"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      className="w-full px-4 py-3.5 rounded-xl text-gray-900 border border-gray-200 hover:border-primary focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50/50"
+                      placeholder="John"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="lastName"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      className="w-full px-4 py-3.5 rounded-xl text-gray-900 border border-gray-200 hover:border-primary focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50/50"
+                      placeholder="Doe"
+                      required
+                    />
                   </div>
                 </div>
-              </div>
 
-              {/* Right Side - Contact Form */}
-              <div>
-                <div className="text-center mb-12 lg:text-left">
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent mb-4">
-                    Get in Touch
-                  </h1>
-                  <p className="text-lg text-gray-600">
-                    We&apos;d love to hear from you. Please fill out this form.
-                  </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="w-full px-4 py-3.5 rounded-xl text-gray-900 border border-gray-200 hover:border-primary focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50/50"
+                      placeholder="john@example.com"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="phone"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      className="w-full px-4 py-3.5 rounded-xl text-gray-900 border border-gray-200 hover:border-primary focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50/50"
+                      placeholder="+1 (555) 000-0000"
+                      required
+                    />
+                  </div>
                 </div>
 
-                <div className="rounded-2xl shadow-2xl p-8 md:p-12 bg-white/95 backdrop-blur-sm border border-gray-100">
-                  <form className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="relative">
-                        <label
-                          htmlFor="name"
-                          className="block text-sm font-medium text-gray-700 mb-1"
-                        >
-                          Full Name
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400"
-                            placeholder="John Doe"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="relative">
-                        <label
-                          htmlFor="email"
-                          className="block text-sm font-medium text-gray-700 mb-1"
-                        >
-                          Email Address
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400"
-                            placeholder="john@example.com"
-                            required
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="relative">
-                      <label
-                        htmlFor="phone"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
-                        Phone Number
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400"
-                          placeholder="+1 (555) 000-0000"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="relative">
-                      <label
-                        htmlFor="message"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
-                        Your Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={6}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white/50 text-gray-900 placeholder-gray-400 resize-none"
-                        placeholder="Write your message here..."
-                        required
-                      />
-                    </div>
-
-                    <div className="mt-8">
-                      <button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-primary to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
-                      >
-                        Send Message
-                      </button>
-                    </div>
-                  </form>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="message"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    className="w-full px-4 py-3.5 rounded-xl text-gray-900 border border-gray-200 hover:border-primary focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50/50 resize-none"
+                    placeholder="How can we help you?"
+                    required
+                  />
                 </div>
-              </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary/20 active:translate-y-0"
+                >
+                  Send Message
+                </button>
+              </form>
             </div>
           </div>
         </div>

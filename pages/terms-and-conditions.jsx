@@ -111,13 +111,20 @@ export default function Terms({
           </Container>
         </FullContainer>
 
-        <Footer
+<FullContainer>
+  <Container>
+
+<Footer
           logo={logo}
           imagePath={imagePath}
           blog_list={blog_list}
           categories={categories}
           footer_type={footer_type}
         />
+  </Container>
+
+</FullContainer>
+       
 
         <JsonLd
           data={{

@@ -194,14 +194,16 @@ export default function Categories({
           </Container>
         </FullContainer>
 
-        {/* Render Footer */}
-        <Footer
-          logo={logo}
-          imagePath={imagePath}
-          blog_list={blog_list}
-          categories={categories}
-        />
-
+        <FullContainer>
+          <Container>
+            <Footer
+              logo={logo}
+              imagePath={imagePath}
+              blog_list={blog_list}
+              categories={categories}
+            />
+          </Container>
+        </FullContainer>
         <JsonLd
           data={{
             "@context": "https://schema.org",

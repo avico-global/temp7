@@ -142,14 +142,18 @@ export default function Tags({
           </Container>
         </FullContainer>
 
-        {/* Render Footer */}
-        <Footer
-          logo={logo_white}
-          imagePath={imagePath}
-          blog_list={blog_list}
-          categories={categories}
-          category={category}
-        />
+        <FullContainer>
+          <Container>
+            {/* Render Footer */}
+            <Footer
+              logo={logo_white}
+              imagePath={imagePath}
+              blog_list={blog_list}
+              categories={categories}
+              category={category}
+            />
+          </Container>
+        </FullContainer>
 
         <JsonLd
           data={{
