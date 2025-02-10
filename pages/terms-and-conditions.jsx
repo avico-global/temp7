@@ -111,20 +111,27 @@ export default function Terms({
           </Container>
         </FullContainer>
 
-<FullContainer>
-  <Container>
-
-<Footer
-          logo={logo}
-          imagePath={imagePath}
-          blog_list={blog_list}
-          categories={categories}
-          footer_type={footer_type}
-        />
-  </Container>
-
-</FullContainer>
-       
+        <FullContainer>
+          <Container>
+            <Footer
+              logo={logo}
+              about_me={
+                about_me?.value
+                  ? {
+                      ...about_me,
+                      value:
+                        about_me.value.split(" ").slice(0, 55).join(" ") +
+                        "...",
+                    }
+                  : about_me
+              }
+              imagePath={imagePath}
+              blog_list={blog_list}
+              categories={categories}
+              footer_type={footer_type}
+            />
+          </Container>
+        </FullContainer>
 
         <JsonLd
           data={{

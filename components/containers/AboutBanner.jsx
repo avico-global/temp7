@@ -16,9 +16,9 @@ export default function AboutBanner({ image }) {
           loading="eager"
           className="-z-10 w-full h-full object-cover absolute top-0"
         />
-        <h2 className="font-extrabold text-6xl capitalize max-w-screen-md">
+        <h1 className="font-extrabold text-6xl capitalize max-w-screen-md">
           About Us
-        </h2>
+        </h1>
       </Container>
     </FullContainer>
   );

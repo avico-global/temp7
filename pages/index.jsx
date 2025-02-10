@@ -288,7 +288,16 @@ export default function Home({
                   </div>
 
                   <Rightbar
-                    about_me={about_me}
+                    about_me={
+                      about_me?.value
+                        ? {
+                            ...about_me,
+                            value:
+                              about_me.value.split(" ").slice(0, 15).join(" ") +
+                              "...",
+                          }
+                        : about_me
+                    }
                     tag_list={tag_list}
                     blog_list={blog_list}
                     imagePath={imagePath}
@@ -353,6 +362,16 @@ export default function Home({
 
             <Footer
               logo={logo}
+              about_me={
+                about_me?.value
+                  ? {
+                      ...about_me,
+                      value:
+                        about_me.value.split(" ").slice(0, 55).join(" ") +
+                        "...",
+                    }
+                  : about_me
+              }
               imagePath={imagePath}
               blog_list={blog_list}
               categories={categories}

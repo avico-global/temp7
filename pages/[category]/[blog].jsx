@@ -139,7 +139,16 @@ export default function Blog({
               </div>
               <Rightbar
                 tag_list={tag_list}
-                about_me={about_me}
+                about_me={
+                  about_me?.value
+                    ? {
+                        ...about_me,
+                        value:
+                          about_me.value.split(" ").slice(0, 15).join(" ") +
+                          "...",
+                      }
+                    : about_me
+                }
                 category={category}
                 imagePath={imagePath}
                 blog_list={blog_list}
@@ -155,6 +164,16 @@ export default function Blog({
           <Container>
             <Footer
               logo={logo}
+              about_me={
+                about_me?.value
+                  ? {
+                      ...about_me,
+                      value:
+                        about_me.value.split(" ").slice(0, 55).join(" ") +
+                        "...",
+                    }
+                  : about_me
+              }
               imagePath={imagePath}
               blog_list={blog_list}
               categories={categories}
