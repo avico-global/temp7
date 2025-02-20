@@ -23,7 +23,7 @@ export default function Footer({
       <div className="grid grid-cols-1 md:grid-cols-footer gap-10 w-full">
         <div>
           <Logo logo={logo} imagePath={imagePath} />
-          <p className="  lg:mr-56 mt-12 font-semibold ">{about_me?.value}</p>
+          <p className="   mt-12 font-semibold ">{about_me?.value}</p>
         </div>
 
         <div className="flex flex-col ">

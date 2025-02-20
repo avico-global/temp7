@@ -18,7 +18,7 @@ export default function Navbar({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const sidebarRef = useRef(null); // Add a ref for the sidebar
   // Add new state variables for search
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [openSearch, setOpenSearch] = useState(false);
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   const searchRef = useRef(null);
@@ -52,22 +52,23 @@ export default function Navbar({
   // Add search handlers
   const handleSearchToggle = () => {
     setOpenSearch(!openSearch);
-    setSearchQuery('');
+    setSearchQuery("");
     setFilteredBlogs([]);
   };
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    
-    if (query.trim() === '') {
+
+    if (query.trim() === "") {
       setFilteredBlogs([]);
       return;
     }
 
-    const filtered = blog_list?.filter((blog) =>
-      blog.title.toLowerCase().includes(query.toLowerCase())
-    ) || [];
+    const filtered =
+      blog_list?.filter((blog) =>
+        blog.title.toLowerCase().includes(query.toLowerCase())
+      ) || [];
     setFilteredBlogs(filtered);
   };
 
@@ -76,14 +77,14 @@ export default function Navbar({
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setOpenSearch(false);
-        setSearchQuery('');
+        setSearchQuery("");
         setFilteredBlogs([]);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -145,7 +146,7 @@ export default function Navbar({
                 </div>
 
                 <Link title="Contact" href="/contact">
-                  Contacts
+                  Contact Us
                 </Link>
                 <Link
                   title="About"
@@ -165,7 +166,7 @@ export default function Navbar({
                   className="w-5 md:w-4 text-black cursor-pointer"
                   onClick={handleSearchToggle}
                 />
-                
+
                 {openSearch && (
                   <div className="fixed lg:absolute top-16 lg:right-0 lg:ml-auto w-full lg:w-fit flex flex-col items-start justify-center lg:justify-end left-0">
                     <input
@@ -183,7 +184,9 @@ export default function Navbar({
                             <Link
                               key={index}
                               title={item.title}
-                              href={`/${sanitizeUrl(item.article_category)}/${sanitizeUrl(item?.title)}`}
+                              href={`/${sanitizeUrl(
+                                item.article_category
+                              )}/${sanitizeUrl(item?.title)}`}
                             >
                               <div className="p-2 hover:bg-gray-200 border-b text-gray-600">
                                 {item.title}

@@ -32,6 +32,7 @@ export default function Contact({
   logo,
   page,
   meta,
+  about_me,
 }) {
   const breadcrumbs = useBreadcrumbs();
 
@@ -283,6 +284,7 @@ export async function getServerSideProps({ req }) {
   const meta = await callBackendApi({ domain, type: "meta_contact" });
   const nav_type = await callBackendApi({ domain, type: "nav_type" });
   const footer_type = await callBackendApi({ domain, type: "footer_type" });
+  const about_me = await callBackendApi({ domain, type: "about_me" });
 
   let page = null;
   if (Array.isArray(layoutPages?.data) && layoutPages.data.length > 0) {
@@ -307,6 +309,7 @@ export async function getServerSideProps({ req }) {
       logo: logo?.data[0],
       meta: meta?.data[0]?.value || null,
       blog_list: blog_list.data[0]?.value,
+      about_me: about_me.data[0] || null,
       nav_type: nav_type?.data[0]?.value || {},
       favicon: favicon?.data[0]?.file_name || null,
       footer_type: footer_type?.data[0]?.value || {},
