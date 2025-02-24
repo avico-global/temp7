@@ -27,6 +27,7 @@ export default function PrivacyPolicy({
   nav_type,
   imagePath,
   footer_type,
+  about_me,
 }) {
   const markdownIt = new MarkdownIt();
   const content = markdownIt.render(policy || "");

@@ -30,6 +30,7 @@ export default function Terms({
   page,
   categories,
   blog_list,
+  about_me,
 }) {
   const markdownIt = new MarkdownIt();
   const content = markdownIt?.render(terms || "");
