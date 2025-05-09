@@ -3,6 +3,7 @@ import Logo2 from "./Logo2";
 import Logo from "./Logo";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { sanitizeUrl } from "@/lib/myFun";
 import { Menu, Search, X } from "lucide-react";
 import Container from "@/components/common/Container";
@@ -15,6 +16,7 @@ export default function Navbar({
   blog_list,
   searchContainerRef,
 }) {
+  const router = useRouter();
   const [sidebar, setSidebar] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const sidebarRef = useRef(null); // Add a ref for the sidebar
@@ -73,7 +75,7 @@ export default function Navbar({
     setFilteredBlogs(filtered);
   };
 
-  // Add click outside handler for search
+  // Handle click outside for search
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -83,11 +85,29 @@ export default function Navbar({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (openSearch) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [openSearch]);
+
+  // Handle router change
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setOpenSearch(false);
+      setSearchQuery("");
+      setFilteredBlogs([]);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router]);
 
   return (
     <>
@@ -169,38 +189,40 @@ export default function Navbar({
                 />
 
                 {openSearch && (
-                  <div className="fixed lg:absolute top-16 lg:right-0 lg:ml-auto w-full lg:w-fit flex flex-col items-start justify-center lg:justify-end left-0">
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={handleSearchChange}
-                      className="lg:text-xl border border-gray-300 inputField rounded-md outline-none bg-gray-300  shadow-xl p-2 px-3 mx-auto duration-300 ease-in-out  w-5/6 lg:w-[650px] focus:ring-2 focus:ring-gray-500"
-                      placeholder="Search..."
-                      autoFocus
-                    />
-                    {searchQuery && (
-                      <div className="lg:absolute top-full p-1 lg:p-3 right-0 bg-white shadow-2xl rounded-md mt-1 z-10 mx-auto w-5/6 lg:w-[650px]">
-                        {filteredBlogs?.length > 0 ? (
-                          filteredBlogs.map((item, index) => (
-                            <Link
-                              key={index}
-                              title={item.title}
-                              href={`/${sanitizeUrl(
-                                item.article_category
-                              )}/${sanitizeUrl(item?.title)}`}
-                            >
-                              <div className="p-2 hover:bg-gray-200 border-b text-gray-600">
-                                {item.title}
-                              </div>
-                            </Link>
-                          ))
-                        ) : (
-                          <div className="p-2 text-gray-600">
-                            No articles found.
-                          </div>
-                        )}
-                      </div>
-                    )}
+                  <div className="fixed lg:absolute top-16 lg:right-0 lg:ml-auto w-full lg:w-fit flex flex-col items-start justify-center lg:justify-end left-0 z-50">
+                    <div className="w-full lg:w-[650px] mx-auto">
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                        className="w-full lg:text-xl border border-gray-300 inputField rounded-md outline-none bg-white shadow-xl p-2 px-3 duration-300 ease-in-out focus:ring-2 focus:ring-gray-500"
+                        placeholder="Search..."
+                        autoFocus
+                      />
+                      {searchQuery && (
+                        <div className="absolute top-full p-1 lg:p-3 right-0 bg-white shadow-2xl rounded-md mt-1 w-full">
+                          {filteredBlogs?.length > 0 ? (
+                            filteredBlogs.map((item, index) => (
+                              <Link
+                                key={index}
+                                title={item.title}
+                                href={`/${sanitizeUrl(
+                                  item.article_category
+                                )}/${sanitizeUrl(item?.title)}`}
+                              >
+                                <div className="p-2 hover:bg-gray-200 border-b text-gray-600">
+                                  {item.title}
+                                </div>
+                              </Link>
+                            ))
+                          ) : (
+                            <div className="p-2 text-gray-600">
+                              No articles found.
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
