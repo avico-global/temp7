@@ -41,7 +41,7 @@ export default function Categories({
   const breadcrumbs = useBreadcrumbs();
 
   const filteredBlogList = blog_list.filter((item) => {
-    const searchContent = sanitizeUrl(category);
+    const searchContent = sanitizeUrl(category.replaceAll("&", "and"));
     return sanitizeUrl(item.article_category) === searchContent;
   });
 
@@ -343,7 +343,7 @@ export async function getServerSideProps({ req, query }) {
 
   const categoryExists = categories?.data[0]?.value?.some(
     (cat) =>
-      cat?.title?.toLowerCase() === category?.replaceAll("-", " ").toLowerCase()
+      sanitizeUrl(cat?.title) === sanitizeUrl(category)
   );
 
   if (!categoryExists) {

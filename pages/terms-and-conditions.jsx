@@ -32,6 +32,7 @@ export default function Terms({
   blog_list,
   about_me,
 }) {
+ 
   const markdownIt = new MarkdownIt();
   const content = markdownIt?.render(terms || "");
   const breadcrumbs = useBreadcrumbs();
@@ -51,11 +52,11 @@ export default function Terms({
           <meta charSet="UTF-8" />
           <title>{meta?.title}</title>
           <meta name="description" content={meta?.description} />
-          <link rel="author" href={`https://www.${domain}`} />
-          <link rel="publisher" href={`https://www.${domain}`} />
+          <link rel="author" href={`https://${domain}`} />
+          <link rel="publisher" href={`https://${domain}`} />
           <link
             rel="canonical"
-            href={`https://www.${domain}/terms-and-conditions`}
+            href={`https://${domain}/terms-and-conditions`}
           />
           <meta name="theme-color" content="#008DE5" />
           <link rel="manifest" href="/manifest.json" />
@@ -187,6 +188,7 @@ export async function getServerSideProps({ req }) {
   const terms = await callBackendApi({ domain, type: "terms" });
   const nav_type = await callBackendApi({ domain, type: "nav_type" });
   const footer_type = await callBackendApi({ domain, type: "footer_type" });
+  const about_me = await callBackendApi({ domain, type: "about_me" });
 
   let page = null;
   if (Array.isArray(layoutPages?.data) && layoutPages.data.length > 0) {
@@ -218,6 +220,7 @@ export async function getServerSideProps({ req }) {
       terms: terms?.data[0]?.value || "",
       nav_type: nav_type?.data[0]?.value || {},
       footer_type: footer_type?.data[0]?.value || {},
+      about_me: about_me?.data[0] || null,
     },
   };
 }

@@ -48,9 +48,9 @@ export default function PrivacyPolicy({
           <meta charSet="UTF-8" />
           <title>{meta?.title}</title>
           <meta name="description" content={meta?.description} />
-          <link rel="author" href={`https://www.${domain}`} />
-          <link rel="publisher" href={`https://www.${domain}`} />
-          <link rel="canonical" href={`https://www.${domain}/privacy-policy`} />
+          <link rel="author" href={`https://${domain}`} />
+          <link rel="publisher" href={`https://${domain}`} />
+          <link rel="canonical" href={`https://${domain}/privacy-policy`} />
           <meta name="theme-color" content="#008DE5" />
           <link rel="manifest" href="/manifest.json" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -107,7 +107,7 @@ export default function PrivacyPolicy({
         </FullContainer>
 
         <FullContainer>
-          <Container>
+        <Container>
             <Footer
               logo={logo}
               about_me={
@@ -182,6 +182,7 @@ export async function getServerSideProps({ req }) {
   const layout = await callBackendApi({ domain, type: "layout" });
   const nav_type = await callBackendApi({ domain, type: "nav_type" });
   const footer_type = await callBackendApi({ domain, type: "footer_type" });
+  const about_me = await callBackendApi({ domain, type: "about_me" });
 
   let page = null;
   if (Array.isArray(layoutPages?.data) && layoutPages.data.length > 0) {
@@ -215,6 +216,7 @@ export async function getServerSideProps({ req }) {
       policy: policy?.data[0]?.value || "",
       nav_type: nav_type?.data[0]?.value || {},
       footer_type: footer_type?.data[0]?.value || {},
+      about_me: about_me?.data[0] || null,
     },
   };
 }
