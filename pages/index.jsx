@@ -21,6 +21,7 @@ import {
 import MustRead from "@/components/containers/MustRead";
 import MostPopular from "@/components/containers/MostPopular";
 
+
 export default function Home({
   footer_type,
   categories,
@@ -38,6 +39,7 @@ export default function Home({
   contact_details,
 }) {
   const lastFiveBlogs = blog_list.slice(-4);
+  
 
   const renderBlogList = () => {
     return (
