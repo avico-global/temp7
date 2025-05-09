@@ -4,6 +4,9 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { sanitizeUrl } from "@/lib/myFun";
 import Logo from "../Navbar/Logo";
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt();
 
 export default function Footer({
   categories,
@@ -23,7 +26,10 @@ export default function Footer({
       <div className="grid grid-cols-1 md:grid-cols-footer gap-10 w-full">
         <div>
           <Logo logo={logo} imagePath={imagePath} />
-          <p className="   mt-12 font-semibold ">{about_me?.value}</p>
+          <div 
+            className="mt-12 font-semibold"
+            dangerouslySetInnerHTML={{ __html: md.render(about_me?.value || '') }}
+          />
         </div>
 
         <div className="flex flex-col ">
