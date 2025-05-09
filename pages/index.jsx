@@ -37,7 +37,7 @@ export default function Home({
   about_me,
   contact_details,
 }) {
-  const lastFiveBlogs = blog_list.slice(-5);
+  const lastFiveBlogs = blog_list.slice(-3);
 
   const renderBlogList = () => {
     return (
