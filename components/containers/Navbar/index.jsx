@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Logo2 from "./Logo2";
 import Logo from "./Logo";
 import Link from "next/link";
 import Image from "next/image";
@@ -217,9 +218,9 @@ export default function Navbar({
       >
         <div>
           <div className="flex items-center justify-between">
-            <Logo logo={logo} imagePath={imagePath} />
+            <Logo2 logo={logo} imagePath={imagePath} />
             <X
-              className="w-8 text-black cursor-pointer"
+              className="w-8  text-black cursor-pointer"
               onClick={() => setSidebar(false)}
             />
           </div>
