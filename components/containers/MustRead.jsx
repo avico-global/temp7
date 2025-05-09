@@ -17,7 +17,7 @@ export default function MustRead({ blog_list = [], imagePath }) {
             {"Essential reads: Don't miss these standout articles."}
           </h2>
         </div>
-        <div className="grid grid-cols-mustRead gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-mustRead gap-8 w-full">
           <div>
             {mustReadBlogs.slice(0, 1).map((item, index) => (
               <div

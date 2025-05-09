@@ -9,7 +9,7 @@ export default function MostPopular({ blog_list = [], imagePath }) {
   return (
     mostPopularBlogs?.length > 0 && (
       <div>
-        <div className="border-t pt-5 px-4 text-center py-10 w-full flex flex-col items-center">
+        <div className="border-t pt-5 px-4 text-center py-10 w-full flex flex-col items-center ">
           <h2 className="px-5 text-4xl font-bold -mt-10 text-center bg-white w-fit">
             {"Most Popular"}
           </h2>
@@ -17,7 +17,7 @@ export default function MostPopular({ blog_list = [], imagePath }) {
             Discover the top trending articles everyone is reading.
           </h2>
         </div>
-        <div className="grid grid-cols-mustRead gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-mustRead gap-8 w-full">
           {mostPopularBlogs.slice(0, 1).map((item, index) => (
             <div key={index} className="relative overflow-hidden group h-full">
               <Link

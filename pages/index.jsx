@@ -210,7 +210,7 @@ export default function Home({
                 blog_list={blog_list}
               />
 
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center ">
                 <div className="lg:flex  lg:flex-col">
                   <h2 className="font-bold text-xl border-b pb-1 mb-3">
                     Latest Posts
@@ -284,7 +284,7 @@ export default function Home({
                 </h2>
               </div>
               <div>
-                <div className="grid grid-cols-1 md:grid-cols-home1 gap-12 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-home1 gap-12 w-full ">
                   <div className="flex flex-col gap-10 w-full">
                     {renderBlogList(blog_list)}
                   </div>
