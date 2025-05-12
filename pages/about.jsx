@@ -99,7 +99,7 @@ export default function About({
         <FullContainer>
           <Container>
             <Breadcrumbs breadcrumbs={breadcrumbs} className="mt-7" />
-            <div className="grid grid-cols-about gap-16 w-full mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-about gap-16 w-full mb-10">
               <div
                 className="markdown-content about_me prose max-w-full mt-5"
                 dangerouslySetInnerHTML={{ __html: content }}
